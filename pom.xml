@@ -9,6 +9,9 @@
 
     <modules>
 
+        <module>admin</module>
+        <module>common</module>
+        <module>framework</module>
     </modules>
 
     <name>user</name>
