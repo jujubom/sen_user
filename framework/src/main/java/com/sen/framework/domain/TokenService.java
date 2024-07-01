@@ -56,13 +56,14 @@ public class TokenService {
         String token = getToken(request);
         if (StringUtils.isNotEmpty(token)) {
             try {
+                // 从JWT中解析token是否合法
                 Claims claims = parseToken(token);
                 // 解析对应的权限以及用户信息
                 String uuid = (String) claims.get(Constants.LOGIN_USER_KEY);
                 String userKey = getTokenKey(uuid);
-                LoginUser user = redisCache.getCacheObject(userKey);
-                return user;
+                return redisCache.getCacheObject(userKey);
             } catch (Exception e) {
+                e.printStackTrace();
             }
         }
         return null;

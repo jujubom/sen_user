@@ -1,0 +1,27 @@
+package com.sen.framework.config.auth.handler;
+
+import com.alibaba.fastjson.JSON;
+import com.sen.common.core.domain.ResponseData;
+import com.sen.framework.utils.ServletUtils;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.stereotype.Component;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+/**
+ * @author SEN
+ * @version 1.0.0
+ * @date 2024-07-01
+ */
+@Component
+public class UserAuthAccessDeniedHandler implements AccessDeniedHandler {
+    @Override
+    public void handle(HttpServletRequest httpServletRequest, HttpServletResponse response,
+                       AccessDeniedException e) throws IOException, ServletException {
+        ServletUtils.renderString(response, JSON.toJSONString(ResponseData.error("403", "未授权")));
+    }
+}

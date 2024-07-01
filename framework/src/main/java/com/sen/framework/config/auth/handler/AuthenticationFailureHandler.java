@@ -1,4 +1,4 @@
-package com.sen.framework.config.auth;
+package com.sen.framework.config.auth.handler;
 
 import cn.hutool.core.text.StrFormatter;
 import com.alibaba.fastjson.JSON;
@@ -23,7 +23,7 @@ import java.io.Serializable;
  * @date 2024-07-01
  */
 @Component
-public class AuthenticationFailureImpl implements AuthenticationEntryPoint, Serializable {
+public class AuthenticationFailureHandler implements AuthenticationEntryPoint, Serializable {
 
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response,

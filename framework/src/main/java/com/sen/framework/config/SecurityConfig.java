@@ -2,6 +2,8 @@ package com.sen.framework.config;
 
 import com.sen.framework.config.auth.JwtAuthenticationFilter;
 import com.sen.framework.config.auth.JwtAuthenticationProvider;
+import com.sen.framework.config.auth.handler.AuthenticationFailureHandler;
+import com.sen.framework.config.auth.handler.UserAuthAccessDeniedHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,6 +14,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -38,12 +41,32 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
     @Autowired
     private JwtAuthenticationFilter jwtAuthenticationFilter;
 
+    /**
+     * 认证失败处理类
+     */
+    @Autowired
+    private AuthenticationFailureHandler authFailureHandler;
+
+
+    @Autowired
+    private UserAuthAccessDeniedHandler unauthorizedHandler;
 
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         //禁用csrf,由于使用的是jwt,我们这里不需要csrf
-        http.cors().and().csrf().disable().authorizeRequests()
+        http.cors().and().csrf().disable()
+                // 认证失败处理类
+                .exceptionHandling()
+                // 认证失败时候的处理
+                .authenticationEntryPoint(authFailureHandler)
+                // 无权限时候的处理
+                .accessDeniedHandler(unauthorizedHandler)
+                .and()
+                // 基于token，所以不需要session
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+                // 过滤请求
+                .authorizeRequests()
                 //跨域预检请求
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                 //web jars
@@ -67,6 +90,9 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
         http.logout().logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler());
         //token验证过滤器
         http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+
+        // 关闭记住我
+        http.rememberMe().disable();
 
     }
 
