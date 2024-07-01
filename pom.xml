@@ -46,6 +46,7 @@
         <jwt.version>0.9.1</jwt.version>
         <lombok.version>1.16.20</lombok.version>
         <mybatis.plus.version>3.4.0</mybatis.plus.version>
+        <bcprov.version>1.46</bcprov.version>
     </properties>
 
     <dependencyManagement>
@@ -162,11 +163,13 @@
                 <version>${kaptcha.version}</version>
             </dependency>
 
+            <!--提供更多的加密、填充方式-->
             <dependency>
-                <groupId>org.projectlombok</groupId>
-                <artifactId>lombok</artifactId>
-                <version>${lombok.version}</version>
+                <groupId>org.bouncycastle</groupId>
+                <artifactId>bcprov-jdk16</artifactId>
+                <version>${bcprov.version}</version>
             </dependency>
+
             <dependency>
                 <groupId>cn.hutool</groupId>
                 <artifactId>hutool-all</artifactId>
@@ -213,6 +216,11 @@
             <version>${mybatis.plus.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+        </dependency>
 
     </dependencies>
 

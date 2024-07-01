@@ -30,7 +30,11 @@
             <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
 
-
+        <dependency>
+            <groupId>com.sen</groupId>
+            <artifactId>common</artifactId>
+            <version>1.0.0</version>
+        </dependency>
         <!-- 阿里数据库连接池 -->
         <dependency>
             <groupId>com.alibaba</groupId>
@@ -47,11 +51,6 @@
             </exclusions>
         </dependency>
 
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>${mybatis.plus.version}</version>
-        </dependency>
         <!-- 验证码 -->
         <dependency>
             <groupId>com.github.penggle</groupId>
