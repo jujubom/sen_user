@@ -2,9 +2,9 @@ package com.sen.framework.config.auth;
 
 
 import com.sen.common.constant.Constants;
-import com.sen.framework.domain.LoginUser;
+import com.sen.common.core.domain.model.LoginUser;
 import com.sen.framework.domain.TokenService;
-import com.sen.framework.utils.SecurityUtils;
+import com.sen.common.utils.SecurityUtils;
 import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;

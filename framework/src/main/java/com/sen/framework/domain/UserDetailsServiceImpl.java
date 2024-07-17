@@ -1,8 +1,8 @@
 package com.sen.framework.domain;
 
 import com.sen.common.core.domain.entity.User;
-import com.sen.framework.utils.SecurityUtils;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.sen.common.core.domain.model.LoginUser;
+import com.sen.common.utils.SecurityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

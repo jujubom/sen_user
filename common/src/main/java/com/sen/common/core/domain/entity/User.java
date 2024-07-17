@@ -2,6 +2,7 @@ package com.sen.common.core.domain.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.sen.common.core.domain.BaseEntity;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -17,8 +18,7 @@ import java.util.List;
  * @version 1.0.0
  * @date 2024-06-30
  */
-public class User implements Serializable {
-
+public class User extends BaseEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
@@ -91,6 +91,30 @@ public class User implements Serializable {
      */
     private Date loginDate;
 
+    /**
+     * 部门对象
+     */
+    private Dept dept;
+
+    /**
+     * 角色对象
+     */
+    private List<Role> roles;
+
+    /**
+     * 角色组
+     */
+    private Long[] roleIds;
+
+    /**
+     * 岗位组
+     */
+    private Long[] postIds;
+
+    /**
+     * 角色ID
+     */
+    private Long roleId;
 
     public User() {
 
@@ -228,6 +252,46 @@ public class User implements Serializable {
         this.loginDate = loginDate;
     }
 
+    public Dept getDept() {
+        return dept;
+    }
+
+    public void setDept(Dept dept) {
+        this.dept = dept;
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
+
+    public Long[] getRoleIds() {
+        return roleIds;
+    }
+
+    public void setRoleIds(Long[] roleIds) {
+        this.roleIds = roleIds;
+    }
+
+    public Long[] getPostIds() {
+        return postIds;
+    }
+
+    public void setPostIds(Long[] postIds) {
+        this.postIds = postIds;
+    }
+
+    public Long getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(Long roleId) {
+        this.roleId = roleId;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
@@ -245,6 +309,12 @@ public class User implements Serializable {
                 .append("delFlag", getDelFlag())
                 .append("loginIp", getLoginIp())
                 .append("loginDate", getLoginDate())
+                .append("createBy", getCreateBy())
+                .append("createTime", getCreateTime())
+                .append("updateBy", getUpdateBy())
+                .append("updateTime", getUpdateTime())
+                .append("remark", getRemark())
+                .append("dept", getDept())
                 .toString();
     }
 }

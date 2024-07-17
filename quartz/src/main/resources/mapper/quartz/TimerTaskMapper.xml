@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sobuy.quartz.mapper.TimerTaskMapper">
+
+	<resultMap type="TimerTask" id="TimerTaskResult">
+		<id     property="id"          column="id"          />
+		<result property="taskName"        column="task_name"        />
+		<result property="taskGroup"       column="task_group"       />
+		<result property="invokeTarget"   column="invoke_target"   />
+		<result property="cronExpression" column="cron_expression" />
+		<result property="runStatus"         column="run_status"          />
+		<result property="createBy"       column="create_by"       />
+		<result property="createTime"     column="create_time"     />
+		<result property="updateBy"       column="update_by"       />
+		<result property="updateTime"     column="update_time"     />
+	</resultMap>
+	
+	<sql id="selectJobVo">
+        select id, task_name, task_group, invoke_target, cron_expression, run_status, create_by, create_time
+		from t_timer_task
+    </sql>
+	
+	<select id="selectJobList" parameterType="TimerTask" resultMap="TimerTaskResult">
+		<include refid="selectJobVo"/>
+		<where>
+			<if test="jobName != null and jobName != ''">
+				AND task_name like concat('%', #{jobName}, '%')
+			</if>
+			<if test="jobGroup != null and jobGroup != ''">
+				AND task_group = #{jobGroup}
+			</if>
+			<if test="runStatus != null and runStatus != ''">
+				AND run_status = #{runStatus}
+			</if>
+			<if test="invokeTarget != null and invokeTarget != ''">
+				AND invoke_target like concat('%', #{invokeTarget}, '%')
+			</if>
+		</where>
+	</select>
+	
+	<select id="selectJobAll" resultMap="TimerTaskResult">
+		<include refid="selectJobVo"/>
+	</select>
+	
+	<select id="selectJobById" parameterType="Long" resultMap="TimerTaskResult">
+		<include refid="selectJobVo"/>
+		where id = #{jobId}
+	</select>
+	
+	<delete id="deleteJobById" parameterType="Long">
+ 		delete from t_timer_task where id = #{jobId}
+ 	</delete>
+ 	
+ 	<delete id="deleteJobByIds" parameterType="Long">
+ 		delete from t_timer_task where id in
+ 		<foreach collection="array" item="jobId" open="(" separator="," close=")">
+ 			#{jobId}
+        </foreach> 
+ 	</delete>
+ 	
+ 	<update id="updateJob" parameterType="TimerTask">
+ 		update t_timer_task
+ 		<set>
+ 			<if test="jobName != null and jobName != ''">task_name = #{jobName},</if>
+ 			<if test="jobGroup != null and jobGroup != ''">task_group = #{jobGroup},</if>
+ 			<if test="invokeTarget != null and invokeTarget != ''">invoke_target = #{invokeTarget},</if>
+ 			<if test="cronExpression != null and cronExpression != ''">cron_expression = #{cronExpression},</if>
+ 			<if test="status !=null">run_status = #{runStatus},</if>
+ 			<if test="updateBy != null">update_by = #{updateBy},</if>
+ 			update_time = sysdate()
+ 		</set>
+ 		where id = #{jobId}
+	</update>
+ 	
+ 	<insert id="insertJob" parameterType="TimerTask" useGeneratedKeys="true" keyProperty="jobId">
+ 		insert into t_timer_task(
+ 			<if test="jobId != null and jobId != 0">id,</if>
+ 			<if test="jobName != null and jobName != ''">task_name,</if>
+ 			<if test="jobGroup != null and jobGroup != ''">task_group,</if>
+ 			<if test="invokeTarget != null and invokeTarget != ''">invoke_target,</if>
+ 			<if test="cronExpression != null and cronExpression != ''">cron_expression,</if>
+ 			<if test="status != null and status != ''">run_status,</if>
+ 			<if test="createBy != null">create_by,</if>
+ 			create_time
+ 		)values(
+ 			<if test="jobId != null and jobId != 0">#{jobId},</if>
+ 			<if test="jobName != null and jobName != ''">#{jobName},</if>
+ 			<if test="jobGroup != null and jobGroup != ''">#{jobGroup},</if>
+ 			<if test="invokeTarget != null and invokeTarget != ''">#{invokeTarget},</if>
+ 			<if test="cronExpression != null and cronExpression != ''">#{cronExpression},</if>
+ 			<if test="status != null and status != ''">#{runStatus},</if>
+ 			<if test="createBy != null">#{createBy},</if>
+ 			sysdate()
+ 		)
+	</insert>
+
+</mapper> 

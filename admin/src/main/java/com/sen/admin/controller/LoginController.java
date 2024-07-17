@@ -2,11 +2,8 @@ package com.sen.admin.controller;
 
 import com.sen.common.constant.Constants;
 import com.sen.common.core.domain.ResponseData;
-import com.sen.common.core.domain.model.vo.LoginBody;
+import com.sen.common.core.domain.model.LoginBody;
 import com.sen.framework.login.LoginService;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

@@ -4,7 +4,7 @@ import cn.hutool.core.text.StrFormatter;
 import com.alibaba.fastjson.JSON;
 import com.sen.common.constant.HttpStatus;
 import com.sen.common.core.domain.ResponseData;
-import com.sen.framework.utils.ServletUtils;
+import com.sen.common.utils.ServletUtils;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;

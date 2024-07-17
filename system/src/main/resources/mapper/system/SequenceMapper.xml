@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sen.system.mapper.SequenceMapper">
+
+    <resultMap type="Sequence" id="sequenceResult">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="value" column="value"/>
+        <result property="digit" column="digit"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+    <update id="updateTopSeq">
+        update t_sequence set value =#{newValue}, update_time = #{updateTime} where name = #{name} and value = #{oldValue}
+    </update>
+
+    <update id="recoverValue" parameterType="java.util.List">
+        <foreach collection="sequenceList" item="item" separator=";">
+            update t_sequence
+            <set>
+                value = #{item.value},
+                update_time = now()
+            </set>
+            where id = #{item.id}
+        </foreach>
+    </update>
+
+
+    <select id="getTopSeqByName" resultType="java.lang.Long">
+        select value from t_sequence where name = #{name}
+    </select>
+
+    <select id="selectAll" resultType="com.sen.common.core.domain.entity.Sequence">
+        select id, name, value, digit from t_sequence
+    </select>
+
+
+</mapper> 

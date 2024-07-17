@@ -1,4 +1,4 @@
-package com.sen.framework.utils;
+package com.sen.common.utils;
 
 import cn.hutool.core.convert.Convert;
 import org.springframework.web.context.request.RequestAttributes;

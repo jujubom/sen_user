@@ -1,15 +1,15 @@
-package com.sen.common.core.domain.model.vo;
+package com.sen.common.core.domain.model;
 
+import io.swagger.annotations.ApiModel;
 import lombok.Data;
 
 /**
- * 对外用户登入实体类
- *
  * @author SEN
  * @version 1.0.0
- * @date 2024-06-29
+ * @date 2024-07-17
  */
 @Data
+@ApiModel("用户登入实体类")
 public class LoginBody {
 
     /**

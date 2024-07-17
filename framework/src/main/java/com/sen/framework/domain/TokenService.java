@@ -1,8 +1,8 @@
 package com.sen.framework.domain;
 
 import com.sen.common.constant.Constants;
+import com.sen.common.core.domain.model.LoginUser;
 import com.sen.common.core.redis.RedisCache;
-import eu.bitwalker.useragentutils.UserAgent;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

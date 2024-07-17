@@ -1,6 +1,6 @@
-package com.sen.framework.utils;
+package com.sen.common.utils;
 
-import com.sen.framework.domain.LoginUser;
+import com.sen.common.core.domain.model.LoginUser;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;

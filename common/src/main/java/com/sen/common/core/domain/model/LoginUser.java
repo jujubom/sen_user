@@ -1,4 +1,4 @@
-package com.sen.framework.domain;
+package com.sen.common.core.domain.model;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import com.sen.common.core.domain.entity.User;

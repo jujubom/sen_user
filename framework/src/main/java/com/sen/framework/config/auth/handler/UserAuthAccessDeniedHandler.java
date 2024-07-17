@@ -2,7 +2,7 @@ package com.sen.framework.config.auth.handler;
 
 import com.alibaba.fastjson.JSON;
 import com.sen.common.core.domain.ResponseData;
-import com.sen.framework.utils.ServletUtils;
+import com.sen.common.utils.ServletUtils;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.stereotype.Component;
