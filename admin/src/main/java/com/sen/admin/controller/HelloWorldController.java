@@ -1,12 +1,11 @@
 package com.sen.admin.controller;
 
-import com.sen.common.constant.Constants;
 import com.sen.common.core.domain.ResponseData;
-import com.sen.common.core.domain.model.vo.LoginBody;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.HashMap;
 
 /**
  * @author SEN
@@ -18,10 +17,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class HelloWorldController {
 
     @PostMapping("/hello")
-    public ResponseData hello(){
-        ResponseData result = ResponseData.success("请求成功");
-
-        return result;
+    public ResponseData hello() {
+        HashMap<Object, Object> map = new HashMap<>();
+        map.put("test", "测试");
+        return ResponseData.success("请求成功", map);
     }
 
 }
